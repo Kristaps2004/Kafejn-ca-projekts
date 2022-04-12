@@ -1,9 +1,9 @@
 # Kafejnica-projekts
 
-###Grupa:
+### Grupa:
 DP2-1
 
-###Autori:
+### Autori:
 * Kristaps Ešmits
 * Ilona Grebņova
 
