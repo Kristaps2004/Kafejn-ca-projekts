@@ -1,6 +1,10 @@
-class Menu : Kafejnica {
-  protected string Food;
-  protected string Drinks;
-  protected double Price;
-  protected int Amount;
+using System;
+
+public class Menu : Cafe {
+  public Menu(string Food, string Drinks, double Price, int Amount){
+    this.food = Food;
+    this.drinks = Drinks;
+    this.price = Price;
+    this.amount = Amount;
+  }
 }
