@@ -1,26 +1,29 @@
 using System;
+using System.IO;
 
 class Program {
 
+  Client client = new Client(1, "", "", 1);
+  
   static int Izvele(){
     int number = Convert.ToInt32(Console.ReadLine());
     return number;
   }
 
-  static void Banner(){
+  public void Banner(){
     Console.Clear();
     Console.WriteLine(@"
 ===================================================
-        KAFEINICAS PARVALDIBAS SISTEMA
+        KAFEJNICAS PARVALDIBAS SISTEMA
 ===================================================");
   }
 
-  static void Footer(){
+  public void Footer(){
     Console.WriteLine("____________________________________________________");
     Console.Write("Enter Your choice: ");
   }
 
-  static void WrongInput(){
+  public void WrongInput(){
     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
     Console.WriteLine("                                                    ");
     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
@@ -28,7 +31,7 @@ class Program {
   }
   
   //Main menu
-  static void Main(){
+  public void Main(){
     Banner();
     Console.WriteLine(@"
 Main Menu:
@@ -74,7 +77,7 @@ Main Menu:
   }
   
   //Add Data Menu
-  static void Menu1(){
+  public void Menu1(){
     Banner();
     Console.WriteLine(@"
 Add Data Menu:
@@ -88,6 +91,7 @@ Add Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
+          client.KlientaPievienosana();
           Main();
             break;
         case 2:
@@ -108,7 +112,7 @@ Add Data Menu:
   }
 
   //View Data Menu
-  static void Menu2(){
+  public void Menu2(){
     Banner();
     Console.WriteLine(@"
 View Data Menu:
@@ -122,6 +126,7 @@ View Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
+          client.PrecesSkatitDatus();
           Main();
             break;
         case 2:
@@ -142,7 +147,7 @@ View Data Menu:
   }
 
   //Delete Data Menu
-  static void Menu3(){
+  public void Menu3(){
     Banner();
     Console.WriteLine(@"
 Delete Data Menu:
@@ -176,7 +181,7 @@ Delete Data Menu:
   }
 
   //Search Data Menu
-  static void Menu4(){
+  public void Menu4(){
     Banner();
     Console.WriteLine(@"
 Search Data Menu:
@@ -210,7 +215,7 @@ Search Data Menu:
   }
 
   //Summary Menu
-  static void Menu5(){
+  public void Menu5(){
     Banner();
     Console.WriteLine(@"
 Summary Menu:
@@ -244,7 +249,7 @@ Summary Menu:
   }
 
   //Sort Data Menu
-  static void Menu6(){
+  public void Menu6(){
     Banner();
     Console.WriteLine(@"
 Sort Data Menu:
@@ -275,5 +280,9 @@ Sort Data Menu:
 					break;
       }
     }
+  }
+  public static void Main (string[] args){
+    Program program = new Program();
+    program.Main();
   }
 }
