@@ -2,16 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-//Nezinu kas nahuj te jādara daru pa savam <3
-//Spageti is life spageti is love
-/*public class Client : Cafe {
-  public Client(string Name, string Surname, int Phone_NR){
-    this.name = Name;
-    this.surname = Surname;
-    this.phone_nr = Phone_NR;
-  }*/
-
-class Client{
+public class Client : Cafe{
   public int ID = 0;
   public string Name;
   public string Surname;
@@ -25,7 +16,6 @@ class Client{
   }
 
   //Datu pievienošana
-  //datus var pievienot, bet saglabājas tikai pēdējais ieraksts aaaaaaaaaaaaaaaaaaaaaaaaaa
   public void KlientaPievienosana(){
     Console.Clear();
     ID = ID + 1;
@@ -56,8 +46,8 @@ class Client{
   }
 
   //Datu lasīšana
-  //figņa nebeidz lasīt lasa visu kas viņam patīk heeeeeeeelpppppppppppppppppp plllssssssssssss
   public void PrecesSkatitDatus(){
+    Console.Clear();
     List<Client> client = new List<Client>();
     
     using (BinaryReader reader = new  BinaryReader(File.Open("Client.dat", FileMode.Open))) {
@@ -67,11 +57,11 @@ class Client{
         Surname = reader.ReadString();
         Phone_nr = reader.ReadInt32();
         client.Add(new Client(ID, Name, Surname, Phone_nr));
-        Console.WriteLine("Press any key to continue!");
       }
     }
     foreach (Client clients in client){
       Console.WriteLine($"ID: {clients.ID}  Name: {clients.Name}, Surname: {clients.Surname}, Phone_nr: {clients.Phone_nr}");
+      Console.WriteLine("Press any key to continue!");
       Console.ReadKey();
     }
   }
