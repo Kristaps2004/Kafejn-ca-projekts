@@ -61,12 +61,13 @@ class Client{
     List<Client> client = new List<Client>();
     
     using (BinaryReader reader = new  BinaryReader(File.Open("Client.dat", FileMode.Open))) {
-      while (reader.PeekChar() > -1){
+      while (reader.PeekChar() > 1){
         ID = reader.ReadInt32();
         Name = reader.ReadString();
         Surname = reader.ReadString();
         Phone_nr = reader.ReadInt32();
         client.Add(new Client(ID, Name, Surname, Phone_nr));
+        Console.WriteLine("Press any key to continue!");
       }
     }
     foreach (Client clients in client){
