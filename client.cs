@@ -13,7 +13,7 @@ public class Client{
   }
   
   //Datu pievienošana
-   public void ClientAdd(){
+  public void ClientAdd(){
     Console.Clear();
    
     string path = @"Client.txt";
@@ -65,9 +65,8 @@ public class Client{
     Console.Clear();
     string tempFile = Path.GetTempFileName();
     string path = @"Client.txt";
-    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
-    {
-      for(int i = 1; i <= ID_client(path)/3; i++){
+    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
+      for(int i = 1; i <= ID_client(path) / 3; i++){
         Console.Write($"ID: {i}\n");
         Console.Write($"Name: ");
         Console.WriteLine(streamreader.ReadLine());
@@ -78,16 +77,16 @@ public class Client{
         Console.WriteLine();
       }
     }
-    Console.Write("Enter ID: ");
+    Console.Write("Enter ID of client you want to remove: ");
     int number = Convert.ToInt32(Console.ReadLine());
     int obj = 1 + (3*(number-1));
     Console.WriteLine(obj);
+    //Hz
     int line_number = 0;
     string line;
     
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
-    using(StreamWriter streamWriter = new StreamWriter(tempFile))
-    {
+    using(StreamWriter streamWriter = new StreamWriter(tempFile)){
       while((line = streamreader.ReadLine()) != null) {
         line_number++;
         if (line_number < obj || line_number > obj+2){
@@ -95,8 +94,11 @@ public class Client{
         }
       }
     }
+    //
     File.Delete("Client.txt");
     File.Move(tempFile, "Client.txt");
+    Console.WriteLine("Press any key to continue!");
+    Console.ReadKey();
   }
   
   //Search Data

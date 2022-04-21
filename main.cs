@@ -163,6 +163,7 @@ Delete Data Menu:
       switch(Izvele()){
         case 1:
           client.DeleteClientData();
+          client.ClientView();
           Main();
             break;
         case 2:
