@@ -45,7 +45,9 @@ public class Client{
     Console.Clear();
     string path = @"Client.txt";
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
+      Console.WriteLine($"No Data!");
       for(int i = 1; i <= ID_client(path) / 3; i++){
+        Console.Clear();
         Console.Write($"ID: {i}\n");
         Console.Write($"Name: ");
         Console.WriteLine(streamreader.ReadLine());
@@ -80,8 +82,8 @@ public class Client{
     Console.Write("Enter ID of client you want to remove: ");
     int number = Convert.ToInt32(Console.ReadLine());
     int obj = 1 + (3*(number-1));
+    //Hz jāpārtaisa
     Console.WriteLine(obj);
-    //Hz
     int line_number = 0;
     string line;
     
@@ -94,11 +96,9 @@ public class Client{
         }
       }
     }
-    //
+    //Līdz šai vietais tas hz
     File.Delete("Client.txt");
     File.Move(tempFile, "Client.txt");
-    Console.WriteLine("Press any key to continue!");
-    Console.ReadKey();
   }
   
   //Search Data
