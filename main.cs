@@ -1,13 +1,9 @@
-//Pievienošana strādā
-//Lasīšana ķip
-//Pārējos komentraus izlasi specifiskajos failos -_-
 
 using System;
-using System.IO;
 
 class Program {
 
-  Client client = new Client(1, "", "", 1);
+  Client client = new Client("", "", 1);
   //Menu menu = new Menu(1,"",1);
   
   static int Izvele(){
@@ -96,11 +92,10 @@ Add Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          client.KlientaPievienosana();
+          client.ClientAdd();
           Main();
             break;
         case 2:
-          //menu.MenuPievienosana();
           Main();
             break;
         case 3:
@@ -132,7 +127,7 @@ View Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          client.PrecesSkatitDatus();
+          client.ClientView();
           Main();
             break;
         case 2:
@@ -167,6 +162,7 @@ Delete Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
+          client.DeleteClientData();
           Main();
             break;
         case 2:
@@ -201,6 +197,7 @@ Search Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
+          client.SearchClientData();
           Main();
             break;
         case 2:
@@ -235,6 +232,7 @@ Summary Menu:
       success = true;
       switch(Izvele()){
         case 1:
+          client.SummaryClientData();
           Main();
             break;
         case 2:
@@ -269,6 +267,7 @@ Sort Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
+          client.SortClientData();
           Main();
             break;
         case 2:

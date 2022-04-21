@@ -1,67 +1,120 @@
 using System;
 using System.IO;
-using System.Collections.Generic;
 
 public class Client{
-  public int ID_client = 0; 
   public string Name;
   public string Surname;
   public int Phone_nr;
 
-  public Client(int id_client, string name, string surname, int phone_nr){
-    this.ID_client = id_client;
+  public Client(string name, string surname, int phone_nr){
     this.Name = name;
     this.Surname = surname;
     this.Phone_nr = phone_nr;
   }
-
+  
   //Datu pievienošana
-  public void KlientaPievienosana(){
+   public void ClientAdd(){
     Console.Clear();
-    ID_client = ID_client + 1;
+   
+    string path = @"Client.txt";
+
     Console.Write("Client Name: ");
-    Name = Console.ReadLine();
+    string Name = Console.ReadLine();
     Console.Write("Client Surname: ");
-    Surname = Console.ReadLine();
+    string Surname = Console.ReadLine();
     Console.Write("Client Phone_nr: ");
-    Phone_nr = Convert.ToInt32(Console.ReadLine());
+    string Phone_nr = Console.ReadLine();
 
-    string path = "Client.dat";
-
-    Client[] clients = {
-      new Client(ID_client, Name, Surname, Phone_nr)
-    };
-
-    using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Append))){
-      foreach (Client client in clients){
-        writer.Write(client.ID_client);
-        writer.Write(client.Name);
-        writer.Write(client.Surname);
-        writer.Write(client.Phone_nr);
-      }
-      Console.WriteLine("Succes! Press any key to continue!");
-      Console.ReadKey();
+    using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
+      sw.WriteLine($"{Name}\n{Surname}\n{Phone_nr}");
     }
+    Console.WriteLine("Succes! Press any key to continue!");
+    Console.ReadKey();
   }
 
   //Datu lasīšana
-  public void PrecesSkatitDatus(){
+  int ID_client(string filePath){
+    using (StreamReader r = new StreamReader(filePath)){
+        int i = 0;
+        while (r.ReadLine() != null) { i++; }
+        return i;
+    }
+  }
+  
+  public void ClientView(){
     Console.Clear();
-    List<Client> client = new List<Client>();
-    
-    using (BinaryReader reader = new  BinaryReader(File.Open("Client.dat", FileMode.Open))) {
-      while (reader.PeekChar() > -1){
-        ID_client = reader.ReadInt32();
-        Name = reader.ReadString();
-        Surname = reader.ReadString();
-        Phone_nr = reader.ReadInt32();
-        client.Add(new Client(ID_client, Name, Surname, Phone_nr));
+    string path = @"Client.txt";
+    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
+      for(int i = 1; i <= ID_client(path) / 3; i++){
+        Console.Write($"ID: {i}\n");
+        Console.Write($"Name: ");
+        Console.WriteLine(streamreader.ReadLine());
+        Console.Write($"Surname: ");
+        Console.WriteLine(streamreader.ReadLine());
+        Console.Write($"Phone_nr: ");
+        Console.WriteLine(streamreader.ReadLine());
+        Console.WriteLine();
       }
     }
-    foreach (Client clients in client){
-      Console.WriteLine($"ID: {clients.ID_client}  Name: {clients.Name}, Surname: {clients.Surname}, Phone_nr: {clients.Phone_nr}");
-      Console.WriteLine("Press any key to continue!");
-      Console.ReadKey();
+    Console.WriteLine("Press any key to continue!");
+    Console.ReadKey();
+  }
+
+  //Delete Data
+  public void DeleteClientData(){
+    Console.Clear();
+    string tempFile = Path.GetTempFileName();
+    string path = @"Client.txt";
+    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
+    {
+      for(int i = 1; i <= ID_client(path)/3; i++){
+        Console.Write($"ID: {i}\n");
+        Console.Write($"Name: ");
+        Console.WriteLine(streamreader.ReadLine());
+        Console.Write($"Surname: ");
+        Console.WriteLine(streamreader.ReadLine());
+        Console.Write($"Phone_nr: ");
+        Console.WriteLine(streamreader.ReadLine());
+        Console.WriteLine();
+      }
     }
+    Console.Write("Enter ID: ");
+    int number = Convert.ToInt32(Console.ReadLine());
+    int obj = 1 + (3*(number-1));
+    Console.WriteLine(obj);
+    int line_number = 0;
+    string line;
+    
+    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
+    using(StreamWriter streamWriter = new StreamWriter(tempFile))
+    {
+      while((line = streamreader.ReadLine()) != null) {
+        line_number++;
+        if (line_number < obj || line_number > obj+2){
+          streamWriter.WriteLine(line);
+        }
+      }
+    }
+    File.Delete("Client.txt");
+    File.Move(tempFile, "Client.txt");
+  }
+  
+  //Search Data
+  public void SearchClientData(){
+    Console.Clear();
+    
+  }
+    
+  //Summary
+    
+  public void SummaryClientData(){
+    Console.Clear();
+    
+  }
+  //Sort
+
+  public void SortClientData(){
+    Console.Clear();
+    
   }
 }
