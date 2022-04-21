@@ -2,14 +2,14 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-public class Client : Cafe{
-  public int ID_client = 0;
+public class Client{
+  public int ID_client = 0; 
   public string Name;
   public string Surname;
   public int Phone_nr;
 
-  public Client(int id, string name, string surname, int phone_nr){
-    this.ID_client = id;
+  public Client(int id_client, string name, string surname, int phone_nr){
+    this.ID_client = id_client;
     this.Name = name;
     this.Surname = surname;
     this.Phone_nr = phone_nr;
@@ -38,7 +38,6 @@ public class Client : Cafe{
         writer.Write(client.Name);
         writer.Write(client.Surname);
         writer.Write(client.Phone_nr);
-        writer.Write(Environment.NewLine);
       }
       Console.WriteLine("Succes! Press any key to continue!");
       Console.ReadKey();

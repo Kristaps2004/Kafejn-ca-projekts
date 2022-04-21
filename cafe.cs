@@ -1,4 +1,5 @@
-using System;
+//Lkm galīgi nevajadzīgs
+/*using System;
 
 public abstract class Cafe {
 
@@ -57,4 +58,4 @@ public abstract class Cafe {
   {
     get {return table_nr;}
   }
-}
+}*/

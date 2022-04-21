@@ -1,9 +1,14 @@
+//Pievienošana strādā
+//Lasīšana ķip
+//Pārējos komentraus izlasi specifiskajos failos -_-
+
 using System;
 using System.IO;
 
 class Program {
 
   Client client = new Client(1, "", "", 1);
+  //Menu menu = new Menu(1,"",1);
   
   static int Izvele(){
     int number = Convert.ToInt32(Console.ReadLine());
@@ -95,6 +100,7 @@ Add Data Menu:
           Main();
             break;
         case 2:
+          //menu.MenuPievienosana();
           Main();
             break;
         case 3:
