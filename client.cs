@@ -3,13 +3,13 @@ using System.IO;
 using System.Collections.Generic;
 
 public class Client : Cafe{
-  public int ID = 0;
+  public int ID_client = 0;
   public string Name;
   public string Surname;
   public int Phone_nr;
 
   public Client(int id, string name, string surname, int phone_nr){
-    this.ID = id;
+    this.ID_client = id;
     this.Name = name;
     this.Surname = surname;
     this.Phone_nr = phone_nr;
@@ -18,7 +18,7 @@ public class Client : Cafe{
   //Datu pievienošana
   public void KlientaPievienosana(){
     Console.Clear();
-    ID = ID + 1;
+    ID_client = ID_client + 1;
     Console.Write("Client Name: ");
     Name = Console.ReadLine();
     Console.Write("Client Surname: ");
@@ -29,12 +29,12 @@ public class Client : Cafe{
     string path = "Client.dat";
 
     Client[] clients = {
-      new Client(ID, Name, Surname, Phone_nr)
+      new Client(ID_client, Name, Surname, Phone_nr)
     };
 
-    using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate))){
+    using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Append))){
       foreach (Client client in clients){
-        writer.Write(client.ID);
+        writer.Write(client.ID_client);
         writer.Write(client.Name);
         writer.Write(client.Surname);
         writer.Write(client.Phone_nr);
@@ -51,16 +51,16 @@ public class Client : Cafe{
     List<Client> client = new List<Client>();
     
     using (BinaryReader reader = new  BinaryReader(File.Open("Client.dat", FileMode.Open))) {
-      while (reader.PeekChar() > 1){
-        ID = reader.ReadInt32();
+      while (reader.PeekChar() > -1){
+        ID_client = reader.ReadInt32();
         Name = reader.ReadString();
         Surname = reader.ReadString();
         Phone_nr = reader.ReadInt32();
-        client.Add(new Client(ID, Name, Surname, Phone_nr));
+        client.Add(new Client(ID_client, Name, Surname, Phone_nr));
       }
     }
     foreach (Client clients in client){
-      Console.WriteLine($"ID: {clients.ID}  Name: {clients.Name}, Surname: {clients.Surname}, Phone_nr: {clients.Phone_nr}");
+      Console.WriteLine($"ID: {clients.ID_client}  Name: {clients.Name}, Surname: {clients.Surname}, Phone_nr: {clients.Phone_nr}");
       Console.WriteLine("Press any key to continue!");
       Console.ReadKey();
     }
