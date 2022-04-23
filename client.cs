@@ -32,7 +32,7 @@ public class Client{
     Console.ReadKey();
   }
 
-  //Datu lasīšana
+  //Datu apskate
   int ID_client(string filePath){
     using (StreamReader r = new StreamReader(filePath)){
         int i = 0;
@@ -82,11 +82,9 @@ public class Client{
     Console.Write("Enter ID of client you want to remove: ");
     int number = Convert.ToInt32(Console.ReadLine());
     int obj = 1 + (3*(number-1));
-    //Hz jāpārtaisa
     Console.WriteLine(obj);
     int line_number = 0;
     string line;
-    
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
     using(StreamWriter streamWriter = new StreamWriter(tempFile)){
       while((line = streamreader.ReadLine()) != null) {
@@ -96,7 +94,6 @@ public class Client{
         }
       }
     }
-    //Līdz šai vietais tas hz
     File.Delete("Client.txt");
     File.Move(tempFile, "Client.txt");
   }

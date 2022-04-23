@@ -1,4 +1,3 @@
-
 using System;
 
 class Program {
@@ -7,8 +6,15 @@ class Program {
   //Menu menu = new Menu(1,"",1);
   
   static int Izvele(){
-    int number = Convert.ToInt32(Console.ReadLine());
-    return number;
+    while (true){
+      try {
+        int number = Convert.ToInt32(Console.ReadLine());
+        return number; 
+      }
+      catch {
+        WrongInput();
+      }
+    }
   }
 
   public void Banner(){
@@ -24,7 +30,7 @@ class Program {
     Console.Write("Enter Your choice: ");
   }
 
-  public void WrongInput(){
+  public static void WrongInput(){
     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
     Console.WriteLine("                                                    ");
     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
