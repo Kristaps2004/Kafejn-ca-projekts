@@ -47,7 +47,6 @@ public class Client{
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
       Console.WriteLine($"No Data!");
       for(int i = 1; i <= ID_client(path) / 3; i++){
-        Console.Clear();
         Console.Write($"ID: {i}\n");
         Console.Write($"Name: ");
         Console.WriteLine(streamreader.ReadLine());
