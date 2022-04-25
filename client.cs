@@ -11,6 +11,38 @@ public class Client{
     this.Surname = surname;
     this.Phone_nr = phone_nr;
   }
+
+  public static void WrongInput(){
+    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+    Console.WriteLine("                                                                      ");
+    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+  }  
+  
+  public static int Input(){
+    while (true){
+      try {
+        int number = Convert.ToInt32(Console.ReadLine());
+        return number; 
+      }
+      catch {
+        WrongInput();
+        Console.Write("Wrong format! Client Phone_nr: ");
+      }
+    }
+  }
+
+  public static int Izvele(){
+    while (true){
+      try {
+        int number = Convert.ToInt32(Console.ReadLine());
+        return number; 
+      }
+      catch {
+        WrongInput();
+        Console.Write("Choice not in range! Enter Your choice: ");
+      }
+    }
+  }
   
   //Datu pievienošana
   public void ClientAdd(){
@@ -23,7 +55,7 @@ public class Client{
     Console.Write("Client Surname: ");
     string Surname = Console.ReadLine();
     Console.Write("Client Phone_nr: ");
-    string Phone_nr = Console.ReadLine();
+    int Phone_nr = Input();
 
     using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
       sw.WriteLine($"{Name}\n{Surname}\n{Phone_nr}");
@@ -34,9 +66,9 @@ public class Client{
 
   //Datu apskate
   int ID_client(string filePath){
-    using (StreamReader r = new StreamReader(filePath)){
+    using (StreamReader streamReader = new StreamReader(filePath)){
         int i = 0;
-        while (r.ReadLine() != null) { i++; }
+        while (streamReader.ReadLine() != null) { i++; }
         return i;
     }
   }
@@ -45,16 +77,20 @@ public class Client{
     Console.Clear();
     string path = @"Client.txt";
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
-      Console.WriteLine($"No Data!");
-      for(int i = 1; i <= ID_client(path) / 3; i++){
-        Console.Write($"ID: {i}\n");
-        Console.Write($"Name: ");
-        Console.WriteLine(streamreader.ReadLine());
-        Console.Write($"Surname: ");
-        Console.WriteLine(streamreader.ReadLine());
-        Console.Write($"Phone_nr: ");
-        Console.WriteLine(streamreader.ReadLine());
-        Console.WriteLine();
+      if (1 > ID_client(path)){
+        Console.WriteLine($"No Data to View!");
+      }
+      else{
+        for(int i = 1; i <= ID_client(path) / 3; i++){
+          Console.Write($"ID: {i}\n");
+          Console.Write($"Name: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.Write($"Surname: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.Write($"Phone_nr: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.WriteLine();
+        }
       }
     }
     Console.WriteLine("Press any key to continue!");
@@ -66,35 +102,42 @@ public class Client{
     Console.Clear();
     string tempFile = Path.GetTempFileName();
     string path = @"Client.txt";
-    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
-      for(int i = 1; i <= ID_client(path) / 3; i++){
-        Console.Write($"ID: {i}\n");
-        Console.Write($"Name: ");
-        Console.WriteLine(streamreader.ReadLine());
-        Console.Write($"Surname: ");
-        Console.WriteLine(streamreader.ReadLine());
-        Console.Write($"Phone_nr: ");
-        Console.WriteLine(streamreader.ReadLine());
-        Console.WriteLine();
-      }
+    if (1 > ID_client(path)){
+      Console.WriteLine($"No Data to delete!");
+      Console.WriteLine("Press any key to continue!");
+      Console.ReadKey();
     }
-    Console.Write("Enter ID of client you want to remove: ");
-    int number = Convert.ToInt32(Console.ReadLine());
-    int obj = 1 + (3*(number-1));
-    Console.WriteLine(obj);
-    int line_number = 0;
-    string line;
-    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
-    using(StreamWriter streamWriter = new StreamWriter(tempFile)){
-      while((line = streamreader.ReadLine()) != null) {
-        line_number++;
-        if (line_number < obj || line_number > obj+2){
-          streamWriter.WriteLine(line);
+    else{
+      using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
+        for(int i = 1; i <= ID_client(path) / 3; i++){
+          Console.Write($"ID: {i}\n");
+          Console.Write($"Name: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.Write($"Surname: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.Write($"Phone_nr: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.WriteLine();
         }
       }
+      Console.Write("Enter ID of client you want to remove: ");
+      int number = Izvele();
+      int obj = 1 + (3*(number-1));
+      Console.WriteLine(obj);
+      int line_number = 0;
+      string line;
+      using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
+      using(StreamWriter streamWriter = new StreamWriter(tempFile)){
+        while((line = streamreader.ReadLine()) != null) {
+          line_number++;
+          if (line_number < obj || line_number > obj+2){
+            streamWriter.WriteLine(line);
+          }
+        }
+      }
+      File.Delete("Client.txt");
+      File.Move(tempFile, "Client.txt");
     }
-    File.Delete("Client.txt");
-    File.Move(tempFile, "Client.txt");
   }
   
   //Search Data

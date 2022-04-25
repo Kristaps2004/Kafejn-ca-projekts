@@ -3,7 +3,7 @@ using System;
 class Program {
 
   Client client = new Client("", "", 1);
-  //Menu menu = new Menu(1,"",1);
+  Menu menu = new Menu("","",1);
   
   static int Izvele(){
     while (true){
@@ -32,7 +32,7 @@ class Program {
 
   public static void WrongInput(){
     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-    Console.WriteLine("                                                    ");
+    Console.WriteLine("                                                                      ");
     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
     Console.Write("Choice not in range! Enter Your choice: ");
   }
@@ -102,6 +102,7 @@ Add Data Menu:
           Main();
             break;
         case 2:
+          menu.MenuAdd();
           Main();
             break;
         case 3:
@@ -137,6 +138,7 @@ View Data Menu:
           Main();
             break;
         case 2:
+          menu.MenuView();
           Main();
             break;
         case 3:
@@ -173,6 +175,8 @@ Delete Data Menu:
           Main();
             break;
         case 2:
+          menu.DeleteMenuData();
+          menu.MenuView();
           Main();
             break;
         case 3:
@@ -208,6 +212,7 @@ Search Data Menu:
           Main();
             break;
         case 2:
+          menu.SearchMenuData();
           Main();
             break;
         case 3:
@@ -243,6 +248,7 @@ Summary Menu:
           Main();
             break;
         case 2:
+          menu.SummaryMenuData();
           Main();
             break;
         case 3:
@@ -278,6 +284,7 @@ Sort Data Menu:
           Main();
             break;
         case 2:
+          menu.SortMenuData();
           Main();
             break;
         case 3:
