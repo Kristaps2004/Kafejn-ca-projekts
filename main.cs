@@ -4,6 +4,7 @@ class Program {
 
   Client client = new Client("", "", 1);
   Menu menu = new Menu("","",1);
+  Order order = new Order("","",1);
   
   static int Izvele(){
     while (true){
@@ -106,6 +107,7 @@ Add Data Menu:
           Main();
             break;
         case 3:
+          order.OrderAdd();
           Main();
             break;
         case 4:
@@ -142,6 +144,7 @@ View Data Menu:
           Main();
             break;
         case 3:
+          order.OrderView();
           Main();
             break;
         case 4:
@@ -180,6 +183,8 @@ Delete Data Menu:
           Main();
             break;
         case 3:
+          order.DeleteOrderData();
+          order.OrderView();
           Main();
             break;
         case 4:
@@ -216,6 +221,7 @@ Search Data Menu:
           Main();
             break;
         case 3:
+          order.SearchOrderData();
           Main();
             break;
         case 4:
@@ -252,6 +258,7 @@ Summary Menu:
           Main();
             break;
         case 3:
+          order.SummaryOrderData();
           Main();
             break;
         case 4:
@@ -288,6 +295,7 @@ Sort Data Menu:
           Main();
             break;
         case 3:
+          order.SortOrderData();
           Main();
             break;
         case 4:

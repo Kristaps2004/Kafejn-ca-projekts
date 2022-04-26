@@ -52,15 +52,14 @@ public class Menu{
 
     Console.Write("Name of the food or drink: ");
     string Name = Console.ReadLine();
-    
-    bool facts = false;
-    while (!facts){
-      Console.Write("Type of item(food or drink): ");
-      string Type = Convert.ToString(Console.ReadLine());
-      WrongInput();
-      if (Type == "food" || Type == "drink"){
-        facts = true;
-      }
+
+    Console.Write("Type of item(food = 1 drink = 2): ");
+    int sk = Convert.ToInt32(Console.ReadLine());
+    if (sk == 1){
+      Type = "food";
+    }
+    else{
+      Type = "drink";
     }
     Console.Write("Price of the item: ");
     double Price = Input();

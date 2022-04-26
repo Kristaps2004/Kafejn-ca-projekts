@@ -143,7 +143,31 @@ public class Client{
   //Search Data
   public void SearchClientData(){
     Console.Clear();
-    
+
+    int counter = 0;
+    string line;
+
+    Console.Write("Input your search text: ");
+    var text = Console.ReadLine();
+
+    System.IO.StreamReader file =
+    new System.IO.StreamReader("Client.txt");
+
+    while ((line = file.ReadLine()) != null)
+    {
+        if (line.Contains(text))
+        {
+          break;
+        }
+
+        counter++;
+    }
+
+    Console.WriteLine("Line number: {0}", counter);
+
+    file.Close();
+
+    Console.ReadLine();
   }
     
   //Summary
@@ -154,7 +178,7 @@ public class Client{
   }
   //Sort
 
-  public void SortClientData(){
+  public void SortClientData() {
     Console.Clear();
     
   }

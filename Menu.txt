@@ -1,12 +1,6 @@
-
-
-20
-sklip
-
-9.99
-juice
-
-9.99
-ilomna
-
+Ilona Grebņova
+food
 1
+Ilona P
+drink
+9.99
