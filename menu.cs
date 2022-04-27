@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-public class Menu{
+public class Menu : Cafe{
   public string Name;
   public string Type;
   public double Price;
@@ -11,44 +11,12 @@ public class Menu{
     this.Type = type;
     this.Price = price;
   }
-
-  public static void WrongInput(){
-    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-    Console.WriteLine("                                                                      ");
-    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-  } 
-
-  public static double Input(){
-    while (true){
-      try {
-        double number = Convert.ToDouble(Console.ReadLine());
-        return number; 
-      }
-      catch {
-        WrongInput();
-        Console.Write("Wrong format! Price of the item: ");
-      }
-    }
-  }
-  
-  public static int Izvele(){
-    while (true){
-      try {
-        int number = Convert.ToInt32(Console.ReadLine());
-        return number; 
-      }
-      catch {
-        WrongInput();
-        Console.Write("Choice not in range! Enter Your choice: ");
-      }
-    }
-  }
-  
+    
   //Datu pievienošana
   public void MenuAdd(){
     Console.Clear();
    
-    string path = @"Menu.txt";
+    string path = @"txt/Menu.txt";
 
     Console.Write("Name of the food or drink: ");
     string Name = Console.ReadLine();
@@ -61,8 +29,11 @@ public class Menu{
     else if(sk == 2){
       Type = "drink";
     }
+    else{
+      
+    }
     Console.Write("Price of the item: ");
-    double Price = Input();
+    double Price = InputMenu();
 
     using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
       sw.WriteLine($"{Name}\n{Type}\n{Price}");
@@ -82,7 +53,7 @@ public class Menu{
   
   public void MenuView(){
     Console.Clear();
-    string path = @"Menu.txt";
+    string path = @"txt/Menu.txt";
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
       if (1 > ID_menu(path)){
         Console.WriteLine($"No Data!");
@@ -108,7 +79,7 @@ public class Menu{
   public void DeleteMenuData(){
     Console.Clear();
     string tempFile = Path.GetTempFileName();
-    string path = @"Menu.txt";
+    string path = @"txt/Menu.txt";
     if (1 > ID_menu(path)){
       Console.WriteLine($"No Data to delete!");
       Console.WriteLine("Press any key to continue!");
@@ -142,8 +113,8 @@ public class Menu{
           }
         }
       }
-      File.Delete("Menu.txt");
-      File.Move(tempFile, "Menu.txt");
+      File.Delete("txt/Menu.txt");
+      File.Move(tempFile, "txt/Menu.txt");
     }
   }
   

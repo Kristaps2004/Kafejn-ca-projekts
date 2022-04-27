@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-public class Client{
+public class Client : Cafe{
   public string Name;
   public string Surname;
   public int Phone_nr;
@@ -11,51 +11,19 @@ public class Client{
     this.Surname = surname;
     this.Phone_nr = phone_nr;
   }
-
-  public static void WrongInput(){
-    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-    Console.WriteLine("                                                                      ");
-    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-  }  
-  
-  public static int Input(){
-    while (true){
-      try {
-        int number = Convert.ToInt32(Console.ReadLine());
-        return number; 
-      }
-      catch {
-        WrongInput();
-        Console.Write("Wrong format! Client Phone_nr: ");
-      }
-    }
-  }
-
-  public static int Izvele(){
-    while (true){
-      try {
-        int number = Convert.ToInt32(Console.ReadLine());
-        return number; 
-      }
-      catch {
-        WrongInput();
-        Console.Write("Choice not in range! Enter Your choice: ");
-      }
-    }
-  }
   
   //Datu pievienošana
   public void ClientAdd(){
     Console.Clear();
    
-    string path = @"Client.txt";
+    string path = @"txt/Client.txt";
 
     Console.Write("Client Name: ");
     string Name = Console.ReadLine();
     Console.Write("Client Surname: ");
     string Surname = Console.ReadLine();
     Console.Write("Client Phone_nr: ");
-    int Phone_nr = Input();
+    int Phone_nr = InputClient();
 
     using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
       sw.WriteLine($"{Name}\n{Surname}\n{Phone_nr}");
@@ -75,7 +43,7 @@ public class Client{
   
   public void ClientView(){
     Console.Clear();
-    string path = @"Client.txt";
+    string path = @"txt/Client.txt";
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
       if (1 > ID_client(path)){
         Console.WriteLine($"No Data to View!");
@@ -101,7 +69,7 @@ public class Client{
   public void DeleteClientData(){
     Console.Clear();
     string tempFile = Path.GetTempFileName();
-    string path = @"Client.txt";
+    string path = @"txt/Client.txt";
     if (1 > ID_client(path)){
       Console.WriteLine($"No Data to delete!");
       Console.WriteLine("Press any key to continue!");
@@ -135,8 +103,8 @@ public class Client{
           }
         }
       }
-      File.Delete("Client.txt");
-      File.Move(tempFile, "Client.txt");
+      File.Delete("txt/Client.txt");
+      File.Move(tempFile, "txt/Client.txt");
     }
   }
   
@@ -151,7 +119,7 @@ public class Client{
     var text = Console.ReadLine();
 
     System.IO.StreamReader file =
-    new System.IO.StreamReader("Client.txt");
+    new System.IO.StreamReader("txt/Client.txt");
 
     while ((line = file.ReadLine()) != null)
     {

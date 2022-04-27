@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-public class Order{
+public class Order : Cafe{
   public int Food;
   public double Total_price;
 
@@ -9,31 +9,12 @@ public class Order{
     this.Food = food;
     this.Total_price = total_price;
   }
-
-  public static void WrongInput(){
-    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-    Console.WriteLine("                                                                      ");
-    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-  }  
-  
-  public static int Izvele(){
-    while (true){
-      try {
-        int number = Convert.ToInt32(Console.ReadLine());
-        return number; 
-      }
-      catch {
-        WrongInput();
-        Console.Write("Choice not in range! Enter Your choice: ");
-      }
-    }
-  }
   
   //Datu pievienošana
   public void OrderAdd(){
     Console.Clear();
 
-    string path = @"Order.txt";
+    string path = @"txt/Order.txt";
 
     Console.Write("Food's ID: ");
     int Food = Convert.ToInt32(Console.ReadLine());
@@ -58,7 +39,7 @@ public class Order{
   //Datu apskate
   public void OrderView(){
     Console.Clear();
-    string path = @"Order.txt";
+    string path = @"txt/Order.txt";
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
       if (1 > ID_order(path)){
         Console.WriteLine($"No Data to View!");
@@ -83,7 +64,7 @@ public class Order{
     Console.Clear();
 
     string tempFile = Path.GetTempFileName();
-    string path = @"Order.txt";
+    string path = @"txt/Order.txt";
     if (1 > ID_order(path)){
       Console.WriteLine($"No Data to delete!");
       Console.WriteLine("Press any key to continue!");
@@ -115,8 +96,8 @@ public class Order{
           }
         }
       }
-      File.Delete("Order.txt");
-      File.Move(tempFile, "Order.txt");
+      File.Delete("txt/Order.txt");
+      File.Move(tempFile, "txt/Order.txt");
     }
   }
   
