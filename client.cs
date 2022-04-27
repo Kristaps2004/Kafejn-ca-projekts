@@ -180,6 +180,18 @@ public class Client{
 
   public void SortClientData() {
     Console.Clear();
-    
+/*
+    double[] doubleArr = Price;
+
+    Console.WriteLine(" :");
+    foreach(int i in doubleArr) {
+      Console.Write(i + " ");
+    }
+    Console.WriteLine();
+    //JESUS
+    Console.WriteLine("Sorting");
+    Array.Sort(doubleArr);
+    foreach(int i in doubleArr);
+    */
   }
 }

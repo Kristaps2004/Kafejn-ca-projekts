@@ -4,7 +4,7 @@ class Program {
 
   Client client = new Client("", "", 1);
   Menu menu = new Menu("","",1);
-  Order order = new Order("","",1);
+  Order order = new Order(1,1);
   
   static int Izvele(){
     while (true){

@@ -58,7 +58,7 @@ public class Menu{
     if (sk == 1){
       Type = "food";
     }
-    else{
+    else if(sk == 2){
       Type = "drink";
     }
     Console.Write("Price of the item: ");
