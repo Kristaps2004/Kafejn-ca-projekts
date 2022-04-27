@@ -11,27 +11,43 @@ public class Menu : Cafe{
     this.Type = type;
     this.Price = price;
   }
-    
+
+  //Food type picker
+  static string FoodType(){
+    try {
+      int sk = Convert.ToInt32(Console.ReadLine());
+      if (sk == 1){
+        string Type = "food";
+        return Type;
+      }
+      else if(sk == 2){
+        string Type = "drink";
+        return Type;
+      }
+      else{
+        Console.Write("Choice not in range! Type of item(food = 1 drink = 2): ");
+        FoodType();
+        return null;
+      }
+    }
+    catch{
+      WrongInput();
+      Console.Write("Wrong format! Price of the item: ");
+      FoodType();
+      return null;
+    }
+  }
+  
   //Datu pievienošana
-  public void MenuAdd(){
+  public static void MenuAdd(){
     Console.Clear();
    
     string path = @"txt/Menu.txt";
 
     Console.Write("Name of the food or drink: ");
     string Name = Console.ReadLine();
-
     Console.Write("Type of item(food = 1 drink = 2): ");
-    int sk = Convert.ToInt32(Console.ReadLine());
-    if (sk == 1){
-      Type = "food";
-    }
-    else if(sk == 2){
-      Type = "drink";
-    }
-    else{
-      
-    }
+    string Type = FoodType();
     Console.Write("Price of the item: ");
     double Price = InputMenu();
 
@@ -43,7 +59,7 @@ public class Menu : Cafe{
   }
 
   //Datu apskate
-  int ID_menu(string filePath){
+  static int ID_menu(string filePath){
     using (StreamReader streamReader = new StreamReader(filePath)){
         int i = 0;
         while (streamReader.ReadLine() != null) { i++; }
@@ -51,7 +67,7 @@ public class Menu : Cafe{
     }
   }
   
-  public void MenuView(){
+  public static void MenuView(){
     Console.Clear();
     string path = @"txt/Menu.txt";
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
@@ -76,7 +92,7 @@ public class Menu : Cafe{
   }
 
   //Delete Data
-  public void DeleteMenuData(){
+  public static void DeleteMenuData(){
     Console.Clear();
     string tempFile = Path.GetTempFileName();
     string path = @"txt/Menu.txt";
@@ -119,20 +135,14 @@ public class Menu : Cafe{
   }
   
   //Search Data
-  public void SearchMenuData(){
+  public static void SearchMenuData(){
     Console.Clear();
     
   }
-    
-  //Summary
-    
-  public void SummaryMenuData(){
-    Console.Clear();
-    
-  }
+
   //Sort
 
-  public void SortMenuData(){
+  public static void SortMenuData(){
     Console.Clear();
     
   }

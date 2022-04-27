@@ -11,15 +11,15 @@ public class Order : Cafe{
   }
   
   //Datu pievienošana
-  public void OrderAdd(){
+  public static void OrderAdd(){
     Console.Clear();
 
     string path = @"txt/Order.txt";
 
     Console.Write("Food's ID: ");
     int Food = Convert.ToInt32(Console.ReadLine());
-    //Console.Write("Total price: ");
-    //double Total_price = Convert.ToDouble(Console.ReadLine());
+    Console.Write("Total price: ");
+    double Total_price = Convert.ToDouble(Console.ReadLine());
 
     using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
       sw.WriteLine($"{Food}\n{Total_price}");
@@ -28,7 +28,7 @@ public class Order : Cafe{
     Console.ReadKey();
   }
 
-  int ID_order(string filePath){
+  static int ID_order(string filePath){
     using (StreamReader streamReader = new StreamReader(filePath)){
         int i = 0;
         while (streamReader.ReadLine() != null) { i++; }
@@ -37,7 +37,7 @@ public class Order : Cafe{
   }
 
   //Datu apskate
-  public void OrderView(){
+  public static void OrderView(){
     Console.Clear();
     string path = @"txt/Order.txt";
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
@@ -60,7 +60,7 @@ public class Order : Cafe{
   }
 
   //Delete Data
-  public void DeleteOrderData(){
+  public static void DeleteOrderData(){
     Console.Clear();
 
     string tempFile = Path.GetTempFileName();
@@ -102,20 +102,14 @@ public class Order : Cafe{
   }
   
   //Search Data
-  public void SearchOrderData(){
+  public static void SearchOrderData(){
     Console.Clear();
 
   }
     
-  //Summary
-    
-  public void SummaryOrderData(){
-    Console.Clear();
-    
-  }
   //Sort
 
-  public void SortOrderData(){
+  public static void SortOrderData(){
     Console.Clear();
     
   }

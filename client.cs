@@ -13,7 +13,7 @@ public class Client : Cafe{
   }
   
   //Datu pievienošana
-  public void ClientAdd(){
+  public static void ClientAdd(){
     Console.Clear();
    
     string path = @"txt/Client.txt";
@@ -33,7 +33,7 @@ public class Client : Cafe{
   }
 
   //Datu apskate
-  int ID_client(string filePath){
+  static int ID_client(string filePath){
     using (StreamReader streamReader = new StreamReader(filePath)){
         int i = 0;
         while (streamReader.ReadLine() != null) { i++; }
@@ -41,7 +41,7 @@ public class Client : Cafe{
     }
   }
   
-  public void ClientView(){
+  public static void ClientView(){
     Console.Clear();
     string path = @"txt/Client.txt";
     using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
@@ -66,7 +66,7 @@ public class Client : Cafe{
   }
 
   //Delete Data
-  public void DeleteClientData(){
+  public static void DeleteClientData(){
     Console.Clear();
     string tempFile = Path.GetTempFileName();
     string path = @"txt/Client.txt";
@@ -109,7 +109,7 @@ public class Client : Cafe{
   }
   
   //Search Data
-  public void SearchClientData(){
+  public static void SearchClientData(){
     Console.Clear();
 
     int counter = 0;
@@ -138,15 +138,9 @@ public class Client : Cafe{
     Console.ReadLine();
   }
     
-  //Summary
-    
-  public void SummaryClientData(){
-    Console.Clear();
-    
-  }
   //Sort
 
-  public void SortClientData() {
+  public static void SortClientData() {
     Console.Clear();
 /*
     double[] doubleArr = Price;

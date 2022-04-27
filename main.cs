@@ -1,10 +1,6 @@
 using System;
 
 class Program {
-
-  Client client = new Client("", "", 1);
-  Menu menu = new Menu("","",1);
-  Order order = new Order(1,1);
   
   static int Izvele(){
     while (true){
@@ -18,7 +14,14 @@ class Program {
     }
   }
 
-  public void Banner(){
+  public static void WrongInput(){
+    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+    Console.WriteLine("                                                                      ");
+    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+    Console.Write("Choice not in range! Enter Your choice: ");
+  }
+
+  public static void Banner(){
     Console.Clear();
     Console.WriteLine(@"
 ===================================================
@@ -26,20 +29,13 @@ class Program {
 ===================================================");
   }
 
-  public void Footer(){
+  public static void Footer(){
     Console.WriteLine("____________________________________________________");
     Console.Write("Enter Your choice: ");
   }
-
-  public static void WrongInput(){
-    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-    Console.WriteLine("                                                                      ");
-    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-    Console.Write("Choice not in range! Enter Your choice: ");
-  }
   
   //Main menu
-  public void Main(){
+  public static void MainMenu(){
     Banner();
     Console.WriteLine(@"
 Main Menu:
@@ -56,22 +52,22 @@ Main Menu:
       success = true;
       switch(Izvele()){
       case 1:
-        Menu1();
+        Program.Menu1();
           break;
       case 2:
-        Menu2();
+        Program.Menu2();
           break;
       case 3:
-        Menu3();
+        Program.Menu3();
           break;
       case 4:
-        Menu4();
+        Program.Menu4();
           break;
       case 5:
-        Menu5();
+        Program.Menu5();
           break;
       case 6:
-        Menu6();
+        Program.Menu6();
           break;
       case 7:
         Environment.Exit(0);
@@ -85,7 +81,7 @@ Main Menu:
   }
   
   //Add Data Menu
-  public void Menu1(){
+  public static void Menu1(){
     Banner();
     Console.WriteLine(@"
 Add Data Menu:
@@ -99,19 +95,19 @@ Add Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          client.ClientAdd();
-          Main();
+          Client.ClientAdd();
+          MainMenu();
             break;
         case 2:
-          menu.MenuAdd();
-          Main();
+          Menu.MenuAdd();
+          MainMenu();
             break;
         case 3:
-          order.OrderAdd();
-          Main();
+          Order.OrderAdd();
+          MainMenu();
             break;
         case 4:
-          Main();
+          MainMenu();
             break;
         default:
           success = false;
@@ -122,7 +118,7 @@ Add Data Menu:
   }
 
   //View Data Menu
-  public void Menu2(){
+  public static void Menu2(){
     Banner();
     Console.WriteLine(@"
 View Data Menu:
@@ -136,19 +132,19 @@ View Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          client.ClientView();
-          Main();
+          Client.ClientView();
+          MainMenu();
             break;
         case 2:
-          menu.MenuView();
-          Main();
+          Menu.MenuView();
+          MainMenu();
             break;
         case 3:
-          order.OrderView();
-          Main();
+          Order.OrderView();
+          MainMenu();
             break;
         case 4:
-          Main();
+          MainMenu();
             break;
         default:
           success = false;
@@ -159,7 +155,7 @@ View Data Menu:
   }
 
   //Delete Data Menu
-  public void Menu3(){
+  public static void Menu3(){
     Banner();
     Console.WriteLine(@"
 Delete Data Menu:
@@ -173,22 +169,22 @@ Delete Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          client.DeleteClientData();
-          client.ClientView();
-          Main();
+          Client.DeleteClientData();
+          Client.ClientView();
+          MainMenu();
             break;
         case 2:
-          menu.DeleteMenuData();
-          menu.MenuView();
-          Main();
+          Menu.DeleteMenuData();
+          Menu.MenuView();
+          MainMenu();
             break;
         case 3:
-          order.DeleteOrderData();
-          order.OrderView();
-          Main();
+          Order.DeleteOrderData();
+          Order.OrderView();
+          MainMenu();
             break;
         case 4:
-          Main();
+          MainMenu();
             break;
         default:
           success = false;
@@ -199,7 +195,7 @@ Delete Data Menu:
   }
 
   //Search Data Menu
-  public void Menu4(){
+  public static void Menu4(){
     Banner();
     Console.WriteLine(@"
 Search Data Menu:
@@ -213,19 +209,19 @@ Search Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          client.SearchClientData();
-          Main();
+          Client.SearchClientData();
+          MainMenu();
             break;
         case 2:
-          menu.SearchMenuData();
-          Main();
+          Menu.SearchMenuData();
+          MainMenu();
             break;
         case 3:
-          order.SearchOrderData();
-          Main();
+          Order.SearchOrderData();
+          MainMenu();
             break;
         case 4:
-          Main();
+         MainMenu();
             break;
         default:
           success = false;
@@ -235,45 +231,13 @@ Search Data Menu:
     }
   }
 
-  //Summary Menu
-  public void Menu5(){
-    Banner();
-    Console.WriteLine(@"
-Summary Menu:
-- 1 - Summary Client
-- 2 - Summary Menu
-- 3 - Summary Order
-- 4 - Back");
-    Footer();
-    bool success = false;
-    while (!success){
-      success = true;
-      switch(Izvele()){
-        case 1:
-          client.SummaryClientData();
-          Main();
-            break;
-        case 2:
-          menu.SummaryMenuData();
-          Main();
-            break;
-        case 3:
-          order.SummaryOrderData();
-          Main();
-            break;
-        case 4:
-          Main();
-            break;
-        default:
-          success = false;
-          WrongInput();
-					break;
-      }
-    }
+  //Summary Menu 
+  public static void Menu5(){
+    Summary.Info();
   }
 
   //Sort Data Menu
-  public void Menu6(){
+  public static void Menu6(){
     Banner();
     Console.WriteLine(@"
 Sort Data Menu:
@@ -287,19 +251,19 @@ Sort Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          client.SortClientData();
-          Main();
+          Client.SortClientData();
+          MainMenu();
             break;
         case 2:
-          menu.SortMenuData();
-          Main();
+          Menu.SortMenuData();
+          MainMenu();
             break;
         case 3:
-          order.SortOrderData();
-          Main();
+          Order.SortOrderData();
+          MainMenu();
             break;
         case 4:
-          Main();
+          MainMenu();
             break;
         default:
           success = false;
@@ -310,6 +274,6 @@ Sort Data Menu:
   }
   public static void Main (string[] args){
     Program program = new Program();
-    program.Main();
+    Program.MainMenu();
   }
 }
