@@ -81,8 +81,11 @@ public class Order : Cafe{
           Console.WriteLine();
         }
       }
-      Console.Write("Enter ID of order you want to remove: ");
+      Console.Write("Enter ID of order you want to remove (0 to go back): ");
       int number = Izvele();
+      if (number == 0){
+        Program.MainMenu();
+      }
       int obj = 1 + (2*(number-1));
       Console.WriteLine(obj);
       int line_number = 0;

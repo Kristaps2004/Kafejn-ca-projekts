@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 
 public class Client : Cafe{
   public string Name;
@@ -88,8 +89,11 @@ public class Client : Cafe{
           Console.WriteLine();
         }
       }
-      Console.Write("Enter ID of client you want to remove: ");
+      Console.Write("Enter ID of client you want to remove (0 to go back): ");
       int number = Izvele();
+      if (number == 0){
+        Program.MainMenu();
+      }
       int obj = 1 + (3*(number-1));
       Console.WriteLine(obj);
       int line_number = 0;
@@ -142,18 +146,16 @@ public class Client : Cafe{
 
   public static void SortClientData() {
     Console.Clear();
-/*
-    double[] doubleArr = Price;
 
-    Console.WriteLine(" :");
-    foreach(int i in doubleArr) {
-      Console.Write(i + " ");
+    string inFile = @"txt/Client.txt";
+    var contents = File.ReadAllLines(inFile);
+    Array.Sort(contents); // Sort alphabetically A-Z
+    Array.Reverse(contents); // Sort alphabetically Z-A
+    for (int i = 0; i < contents.Length; i++){
+      Console.WriteLine(contents[i]);
     }
-    Console.WriteLine();
-    //JESUS
-    Console.WriteLine("Sorting");
-    Array.Sort(doubleArr);
-    foreach(int i in doubleArr);
-    */
+    
+    Console.WriteLine("Press any key to continue!");
+    Console.ReadKey();
   }
 }

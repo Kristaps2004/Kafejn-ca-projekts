@@ -12,32 +12,21 @@ public class Menu : Cafe{
     this.Price = price;
   }
 
-  //Food type picker
-  static string FoodType(){
-    try {
-      int sk = Convert.ToInt32(Console.ReadLine());
-      if (sk == 1){
-        string Type = "food";
-        return Type;
-      }
-      else if(sk == 2){
-        string Type = "drink";
-        return Type;
-      }
-      else{
-        Console.Write("Choice not in range! Type of item(food = 1 drink = 2): ");
-        FoodType();
-        return null;
-      }
+  //Data picker
+  public static string Picker(){
+    ConsoleKeyInfo izvele;
+    izvele = Console.ReadKey();
+    if (izvele.KeyChar == '1'){
+      string Type = "food";
+      return Type;
     }
-    catch{
-      WrongInput();
-      Console.Write("Wrong format! Price of the item: ");
-      FoodType();
-      return null;
+    else if (izvele.KeyChar == '2'){
+      string Type = "drink";
+      return Type;
     }
+    return null;
   }
-  
+   
   //Datu pievienošana
   public static void MenuAdd(){
     Console.Clear();
@@ -47,8 +36,8 @@ public class Menu : Cafe{
     Console.Write("Name of the food or drink: ");
     string Name = Console.ReadLine();
     Console.Write("Type of item(food = 1 drink = 2): ");
-    string Type = FoodType();
-    Console.Write("Price of the item: ");
+    string Type = Picker();
+    Console.Write("\nPrice of the item: ");
     double Price = InputMenu();
 
     using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
@@ -114,8 +103,11 @@ public class Menu : Cafe{
           Console.WriteLine();
         }
       }
-      Console.Write("Enter ID of food on the menu you want to remove: ");
+      Console.Write("Enter ID of food on the menu you want to remove(0 to go back): ");
       int number = Izvele();
+      if (number == 0){
+        Program.MainMenu();
+      }
       int obj = 1 + (3*(number-1));
       Console.WriteLine(obj);
       int line_number = 0;

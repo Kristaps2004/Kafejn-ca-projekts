@@ -1,18 +1,12 @@
 Ilona Grebņova
 food
 1
-Ilona P
-drink
-9.99
-4
-drink
-3
-sula
-
-3
-d
-food
-9.99
 Lasis
 food
+9.99
+Zupa
+food
+9.99
+Mojito
+drink
 9.99
