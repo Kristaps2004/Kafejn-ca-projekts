@@ -9,7 +9,7 @@ class Program {
         return number; 
       }
       catch {
-        WrongInput();
+        Cafe.WrongInput();
       }
     }
   }

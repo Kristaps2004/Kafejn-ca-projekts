@@ -2,12 +2,12 @@ using System;
 using System.IO;
 
 public class Menu : Cafe{
-  public string Name;
+  public string FoodName;
   public string Type;
   public double Price;
 
-  public Menu(string name, string type, double price){
-    this.Name = name;
+  public Menu(string foodname, string type, double price){
+    this.FoodName = foodname;
     this.Type = type;
     this.Price = price;
   }
@@ -34,14 +34,14 @@ public class Menu : Cafe{
     string path = @"txt/Menu.txt";
 
     Console.Write("Name of the food or drink: ");
-    string Name = Console.ReadLine();
+    string FoodName = Console.ReadLine();
     Console.Write("Type of item(food = 1 drink = 2): ");
     string Type = Picker();
     Console.Write("\nPrice of the item: ");
     double Price = InputMenu();
 
     using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
-      sw.WriteLine($"{Name}\n{Type}\n{Price}");
+      sw.WriteLine($"{FoodName}\n{Type}\n{Price}");
     }
     Console.WriteLine("Succes! Press any key to continue!");
     Console.ReadKey();

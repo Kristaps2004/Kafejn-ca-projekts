@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 
 public class Client : Cafe{
   public string Name;
@@ -147,14 +146,22 @@ public class Client : Cafe{
   public static void SortClientData() {
     Console.Clear();
 
-    string inFile = @"txt/Client.txt";
-    var contents = File.ReadAllLines(inFile);
+    string path = @"txt/Client.txt";
+    var contents = File.ReadAllLines(path);
     Array.Sort(contents); // Sort alphabetically A-Z
     Array.Reverse(contents); // Sort alphabetically Z-A
-    for (int i = 0; i < contents.Length; i++){
-      Console.WriteLine(contents[i]);
+    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
+      for(int i = 1; i <= ID_client(path) / 3; i++){
+          Console.Write($"ID: {i}\n");
+          Console.Write($"Name: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.Write($"Surname: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.Write($"Phone_nr: ");
+          Console.WriteLine(streamreader.ReadLine());
+          Console.WriteLine();
+      }
     }
-    
     Console.WriteLine("Press any key to continue!");
     Console.ReadKey();
   }
