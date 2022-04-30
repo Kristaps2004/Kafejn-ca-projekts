@@ -11,11 +11,18 @@ public class Client : Cafe{
     this.Surname = surname;
     this.Phone_nr = phone_nr;
   }
+
+  static int ID_client(string filePath){
+    using (StreamReader streamReader = new StreamReader(filePath)){
+        int i = 0;
+        while (streamReader.ReadLine() != null) { i++; }
+        return i;
+    }
+  }
   
   //Datu pievienošana
   public static void ClientAdd(){
     Console.Clear();
-   
     string path = @"txt/Client.txt";
 
     Console.Write("Client Name: ");
@@ -25,22 +32,14 @@ public class Client : Cafe{
     Console.Write("Client Phone_nr: ");
     int Phone_nr = InputClient();
 
-    using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
-      sw.WriteLine($"{Name}\n{Surname}\n{Phone_nr}");
+    using (StreamWriter streamWriter = new StreamWriter(path, true, System.Text.Encoding.Default)){
+      streamWriter.WriteLine($"{Name}\n{Surname}\n{Phone_nr}");
     }
     Console.WriteLine("Succes! Press any key to continue!");
     Console.ReadKey();
   }
 
   //Datu apskate
-  static int ID_client(string filePath){
-    using (StreamReader streamReader = new StreamReader(filePath)){
-        int i = 0;
-        while (streamReader.ReadLine() != null) { i++; }
-        return i;
-    }
-  }
-  
   public static void ClientView(){
     Console.Clear();
     string path = @"txt/Client.txt";
@@ -49,7 +48,7 @@ public class Client : Cafe{
         Console.WriteLine($"No Data to View!");
       }
       else{
-        for(int i = 1; i <= ID_client(path) / 3; i++){
+        for (int i = 1; i <= ID_client(path) / 3; i++){
           Console.Write($"ID: {i}\n");
           Console.Write($"Name: ");
           Console.WriteLine(streamreader.ReadLine());
@@ -77,7 +76,7 @@ public class Client : Cafe{
     }
     else{
       using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
-        for(int i = 1; i <= ID_client(path) / 3; i++){
+        for (int i = 1; i <= ID_client(path) / 3; i++){
           Console.Write($"ID: {i}\n");
           Console.Write($"Name: ");
           Console.WriteLine(streamreader.ReadLine());
@@ -91,15 +90,15 @@ public class Client : Cafe{
       Console.Write("Enter ID of client you want to remove (0 to go back): ");
       int number = Izvele();
       if (number == 0){
-        Program.MainMenu();
+        Interface.MainMenu();
       }
       int obj = 1 + (3*(number-1));
       Console.WriteLine(obj);
       int line_number = 0;
       string line;
       using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
-      using(StreamWriter streamWriter = new StreamWriter(tempFile)){
-        while((line = streamreader.ReadLine()) != null) {
+      using (StreamWriter streamWriter = new StreamWriter(tempFile)){
+        while ((line = streamreader.ReadLine()) != null) {
           line_number++;
           if (line_number < obj || line_number > obj+2){
             streamWriter.WriteLine(line);
@@ -112,9 +111,8 @@ public class Client : Cafe{
   }
   
   //Search Data
-  public static void SearchClientData(){
+  public static void SearchClientData(int num){
     Console.Clear();
-
     int counter = 0;
     string line;
 
@@ -142,26 +140,46 @@ public class Client : Cafe{
   }
     
   //Sort
-
-  public static void SortClientData() {
+  public static void SortClientData(int num) {
     Console.Clear();
-
-    string path = @"txt/Client.txt";
-    var contents = File.ReadAllLines(path);
-    Array.Sort(contents); // Sort alphabetically A-Z
-    Array.Reverse(contents); // Sort alphabetically Z-A
-    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
-      for(int i = 1; i <= ID_client(path) / 3; i++){
-          Console.Write($"ID: {i}\n");
-          Console.Write($"Name: ");
-          Console.WriteLine(streamreader.ReadLine());
-          Console.Write($"Surname: ");
-          Console.WriteLine(streamreader.ReadLine());
-          Console.Write($"Phone_nr: ");
-          Console.WriteLine(streamreader.ReadLine());
-          Console.WriteLine();
+    
+    Console.Write(@"Choose sort method:
+1 A-Z, 
+2 Z-A
+Type number: ");
+    Console.Write(" ");
+    
+    int Choice = Int32.Parse(Console.ReadLine());
+    if (Choice == 1){
+      string path = @"txt/Client.txt";
+      using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
+        for (int x = num; x <= ID_client(path); x+= 3){
+          if (x < 3){
+            for (int j = 1; j < x; j++){
+              streamreader.ReadLine();
+            }
+          }
+          else{
+            for (int j = x-2; j < x; j++){
+              streamreader.ReadLine();
+            }
+          }
+        Console.Write($"Name of the client: ");
+        Console.WriteLine(streamreader.ReadLine());
+        }
       }
     }
+    else if (Choice == 2){
+        string inFile = @"txt/Client.txt";
+        var contents = File.ReadAllLines(inFile);
+        Array.Reverse(contents); // 2 type of sorting: Z-A
+        for (int i = 0; i < contents.Length; i++){
+          Console.WriteLine(contents[i]);
+        }
+      }
+      else{
+        Console.WriteLine("Choise is not in range!");
+      }
     Console.WriteLine("Press any key to continue!");
     Console.ReadKey();
   }

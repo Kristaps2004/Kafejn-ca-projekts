@@ -40,8 +40,8 @@ public class Menu : Cafe{
     Console.Write("\nPrice of the item: ");
     double Price = InputMenu();
 
-    using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default)){
-      sw.WriteLine($"{FoodName}\n{Type}\n{Price}");
+    using (StreamWriter streamWriter = new StreamWriter(path, true, System.Text.Encoding.Default)){
+      streamWriter.WriteLine($"{FoodName}\n{Type}\n{Price}");
     }
     Console.WriteLine("Succes! Press any key to continue!");
     Console.ReadKey();
@@ -64,7 +64,7 @@ public class Menu : Cafe{
         Console.WriteLine($"No Data!");
       }
       else{
-        for(int i = 1; i <= ID_menu(path) / 3; i++){
+        for (int i = 1; i <= ID_menu(path) / 3; i++){
           Console.Write($"ID: {i}\n");
           Console.Write($"Name: ");
           Console.WriteLine(streamreader.ReadLine());
@@ -92,7 +92,7 @@ public class Menu : Cafe{
     }
     else{
       using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
-        for(int i = 1; i <= ID_menu(path) / 3; i++){
+        for (int i = 1; i <= ID_menu(path) / 3; i++){
           Console.Write($"ID: {i}\n");
           Console.Write($"Name: ");
           Console.WriteLine(streamreader.ReadLine());
@@ -106,15 +106,15 @@ public class Menu : Cafe{
       Console.Write("Enter ID of food on the menu you want to remove(0 to go back): ");
       int number = Izvele();
       if (number == 0){
-        Program.MainMenu();
+        Interface.MainMenu();
       }
       int obj = 1 + (3*(number-1));
       Console.WriteLine(obj);
       int line_number = 0;
       string line;
       using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
-      using(StreamWriter streamWriter = new StreamWriter(tempFile)){
-        while((line = streamreader.ReadLine()) != null) {
+      using (StreamWriter streamWriter = new StreamWriter(tempFile)){
+        while ((line = streamreader.ReadLine()) != null) {
           line_number++;
           if (line_number < obj || line_number > obj+2){
             streamWriter.WriteLine(line);

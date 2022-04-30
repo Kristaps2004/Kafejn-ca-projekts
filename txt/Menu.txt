@@ -1,6 +1,3 @@
-Ilona Grebņova
-food
-1
 Lasis
 food
 9.99
@@ -10,3 +7,6 @@ food
 Mojito
 drink
 9.99
+Ilona
+drink
+1

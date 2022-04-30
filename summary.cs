@@ -15,7 +15,7 @@ class Summary{
     int foods = ID ("txt/Menu.txt") / 3;
     int orders = ID ("txt/Order.txt") / 2;
     Console.Clear();
-    Program.Banner();
+    Interface.Banner();
     Console.WriteLine();
     Console.WriteLine($"Total clients: {clients}");
     Console.WriteLine($"Total foods on menu: {foods}");
@@ -24,6 +24,6 @@ class Summary{
     Console.WriteLine("Press any key to continue!");
     Console.ReadKey();
     Console.Clear();
-    Program.MainMenu();
+    Interface.MainMenu();
   }
 }
