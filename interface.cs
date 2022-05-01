@@ -8,14 +8,14 @@ public class Interface{
         return number; 
       }
       catch {
-        Cafe.WrongInput();
+        WrongInput();
       }
     }
   }
 
   public static void WrongInput(){
     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-    Console.WriteLine("                                                                      ");
+    Console.WriteLine("                                                          ");
     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
     Console.Write("Choice not in range! Enter Your choice: ");
   }
@@ -208,15 +208,96 @@ Search Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          Client.SearchClientData(1);
+          Console.Clear();
+          Banner();
+          Console.WriteLine(@"
+Search Data Menu:
+- 1 - Search Client name
+- 2 - Search Client surname
+- 3 - Search Client phone number
+- 4 - Back");
+          Footer();
+          ConsoleKeyInfo izvele;
+          izvele = Console.ReadKey();
+          if (izvele.KeyChar == '1'){
+            Console.ReadKey();
+            Console.Clear();
+            Client.SearchClientData(1);
+          }
+          else if (izvele.KeyChar == '2'){
+            Console.ReadKey();
+            Console.Clear();
+            Client.SearchClientData(2);
+          }
+          else if (izvele.KeyChar == '3'){
+            Console.ReadKey();
+            Console.Clear();
+            Client.SearchClientData(3);
+          }
+          else if (izvele.KeyChar == '4'){
+            Console.Clear();
+            MainMenu();
+          }
           MainMenu();
             break;
         case 2:
-          Menu.SearchMenuData();
+          Console.Clear();
+          Banner();
+          Console.WriteLine(@"
+Search Data Menu:
+- 1 - Search name of the foods on menu
+- 2 - Search Food types
+- 3 - Search Prices
+- 4 - Back");
+          Footer();
+          izvele = Console.ReadKey();
+          if (izvele.KeyChar == '1'){
+            Console.ReadKey();
+            Console.Clear();
+            Menu.SearchMenuData(1);
+          }
+          else if (izvele.KeyChar == '2'){
+            Console.ReadKey();
+            Console.Clear();
+            Menu.SearchMenuData(2);
+          }
+          else if (izvele.KeyChar == '3'){
+            Console.ReadKey();
+            Console.Clear();
+            Menu.SearchMenuData(3);
+          }
+          else if (izvele.KeyChar == '4'){
+            Console.Clear();
+            MainMenu();
+          }
+          
           MainMenu();
             break;
         case 3:
-          Order.SearchOrderData();
+          Console.Clear();
+          Banner();
+          Console.WriteLine(@"
+Search Data Menu:
+- 1 - Search for amount of food in one order
+- 2 - Search Total price pre-order
+- 4 - Back");
+          Footer();
+          izvele = Console.ReadKey();
+          if (izvele.KeyChar == '1'){
+            Console.ReadKey();
+            Console.Clear();
+            Order.SearchOrderData(1);
+          }
+          else if (izvele.KeyChar == '2'){
+            Console.ReadKey();
+            Console.Clear();
+            Order.SearchOrderData(2);
+          }
+          else if (izvele.KeyChar == '4'){
+            Console.Clear();
+            MainMenu();
+          }
+          
           MainMenu();
             break;
         case 4:
@@ -250,7 +331,7 @@ Sort Data Menu:
       success = true;
       switch(Izvele()){
         case 1:
-          Client.SortClientData(1);
+          Client.SortClientData();
           MainMenu();
             break;
         case 2:

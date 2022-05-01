@@ -92,15 +92,15 @@ public class Client : Cafe{
       if (number == 0){
         Interface.MainMenu();
       }
-      int obj = 1 + (3*(number-1));
-      Console.WriteLine(obj);
+      int ID = 1 + (3*(number-1));
+      Console.WriteLine(ID);
       int line_number = 0;
       string line;
       using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default))
       using (StreamWriter streamWriter = new StreamWriter(tempFile)){
         while ((line = streamreader.ReadLine()) != null) {
           line_number++;
-          if (line_number < obj || line_number > obj+2){
+          if (line_number < ID || line_number > ID+2){
             streamWriter.WriteLine(line);
           }
         }
@@ -113,74 +113,69 @@ public class Client : Cafe{
   //Search Data
   public static void SearchClientData(int num){
     Console.Clear();
-    int counter = 0;
-    string line;
-
-    Console.Write("Input your search text: ");
-    var text = Console.ReadLine();
-
-    System.IO.StreamReader file =
-    new System.IO.StreamReader("txt/Client.txt");
-
-    while ((line = file.ReadLine()) != null)
-    {
-        if (line.Contains(text))
-        {
-          break;
-        }
-
-        counter++;
-    }
-
-    Console.WriteLine("Line number: {0}", counter);
-
-    file.Close();
-
-    Console.ReadLine();
-  }
-    
-  //Sort
-  public static void SortClientData(int num) {
-    Console.Clear();
-    
-    Console.Write(@"Choose sort method:
-1 A-Z, 
-2 Z-A
-Type number: ");
-    Console.Write(" ");
-    
-    int Choice = Int32.Parse(Console.ReadLine());
-    if (Choice == 1){
-      string path = @"txt/Client.txt";
-      using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
-        for (int x = num; x <= ID_client(path); x+= 3){
-          if (x < 3){
-            for (int j = 1; j < x; j++){
+    string path = @"txt/Client.txt";
+    using (StreamReader streamreader = new StreamReader(path,System.Text.Encoding.Default)){
+      for (int i = num; i <= ID_client(path); i+= 3){
+          if (i < 3){
+            for (int x = 1; x < i; x++){
               streamreader.ReadLine();
             }
           }
           else{
-            for (int j = x-2; j < x; j++){
+            for (int x = i-2; x < i; x++){
               streamreader.ReadLine();
             }
           }
-        Console.Write($"Name of the client: ");
-        Console.WriteLine(streamreader.ReadLine());
+        if (num == 1){
+          Console.Write($"Name of the clients: ");
         }
-      }
+        else if (num == 2){
+          Console.Write($"Surname of the clients: ");
+        }
+        else if (num == 3){
+          Console.Write($"Phone numbers of the clients: ");
+        }
+          Console.WriteLine(streamreader.ReadLine());
+        }
     }
-    else if (Choice == 2){
-        string inFile = @"txt/Client.txt";
-        var contents = File.ReadAllLines(inFile);
-        Array.Reverse(contents); // 2 type of sorting: Z-A
-        for (int i = 0; i < contents.Length; i++){
-          Console.WriteLine(contents[i]);
-        }
-      }
-      else{
-        Console.WriteLine("Choise is not in range!");
-      }
-    Console.WriteLine("Press any key to continue!");
+    Console.WriteLine("\nPress any key to continue!");
     Console.ReadKey();
+  }
+    
+  //Sort
+  public static void SortClientData() {
+    Console.Clear();
+    Console.Write(@"Choose sort method:
+1. A-Z 
+2. Z-A
+Type number: ");
+    ConsoleKeyInfo izvele;
+    izvele = Console.ReadKey();
+    string inFile = @"txt/Client.txt";
+    var contents = File.ReadAllLines(inFile);
+    Console.WriteLine("");
+    if (izvele.KeyChar == '1'){
+      Console.ReadKey();
+      Array.Sort(contents); //A-Z
+      for (int i = 0; i < contents.Length; i++){
+        Console.WriteLine(contents[i]);
+      }
+      Console.WriteLine("Press any key to continue!");
+      Console.ReadKey();
+    }
+    else if(izvele.KeyChar == '2'){
+      Console.ReadKey();
+      Array.Sort(contents); 
+      Array.Reverse(contents); //Z-A
+      for (int i = 0; i < contents.Length; i++){
+        Console.WriteLine(contents[i]);
+      }
+      Console.WriteLine("Press any key to continue!");
+      Console.ReadKey();
+    }
+    else{
+      SortClientData();
+      Console.ReadKey();
+    }
   }
 }
